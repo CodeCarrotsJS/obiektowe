@@ -6,6 +6,23 @@ var User = function (email, password, avatarUrl) {
         alert(this.email.toUpperCase() + '!!!!!!1111oneone');
     };
 };
+var UserView = function (user) {
+  this.element = document.createElement('li');
+  this.avatarImg = document.createElement('img');
+  this.mailLink = document.createElement('a');
+  this.user = user;
+
+  this.element.appendChild(this.avatarImg);
+  this.element.appendChild(this.mailLink);
+
+  this.refresh();
+};
+
+UserView.prototype.refresh = function () {
+  this.avatarImg.src = this.user.avatarUrl;
+  this.mailLink.href = 'mailto:' + this.user.email;
+  this.mailLink.innerHTML = this.user.email;
+};
 
 var userList = {
     allUsers: [],
@@ -42,8 +59,21 @@ form.addEventListener('submit', function (e) {
     }
 });
 
-var zosia = new User('zosia.samosia@protonmail.ch', '123456', 'http://awatary.com/2.jpg');
-var michal = new User('michal.matulka@protonmail.ch', 'lla123', 'http://awatary.com/1.jpg');
+function createView(user)
+{
+  var userView = new UserView(userList.allUsers[i]);
+  list.appendChild(userView.element);
+
+}
+
+var list = document.getElementsByTagName('ul')[0];
+var zosia = new User('zosia.samosia@protonmail.ch', '123456', 'https://myworldofcmpunk.files.wordpress.com/2012/07/pics_in_a_pic_avatar_best_in_the_world_cm_punk_by_lovelives4ever-d5cxtt2.jpg');
+var zosiaView = new UserView(zosia);
+list.appendChild(zosiaView.element);
+
+var michal = new User('michal.matulka@protonmail.ch', 'lla123', 'http://www.blogcdn.com/www.joystiq.com/media/2007/09/scrooge-mc-duck-swimming.jpg');
+var michalView = new UserView(michal);
+list.appendChild(michalView.element);
 
 userList.addUser(zosia);
 userList.addUser(michal);
